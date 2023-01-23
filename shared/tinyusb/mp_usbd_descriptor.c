@@ -122,7 +122,7 @@ const uint8_t *tud_descriptor_device_cb(void) {
     return (const void *)&mp_usbd_desc_device_static;
 }
 
-const uint8_t *tud_descriptor_configuration_cb(uint8_t index) {
-    (void)index;
-    return mp_usbd_desc_cfg_static;
-}
+// const uint8_t *tud_descriptor_configuration_cb(uint8_t index) {
+//     (void)index;
+//     return mp_usbd_desc_cfg_static;
+// }

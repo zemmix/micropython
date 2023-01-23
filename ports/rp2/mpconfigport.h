@@ -40,6 +40,7 @@
 #define MICROPY_HW_ENABLE_USBDEV                (1)
 
 #if MICROPY_HW_ENABLE_USBDEV
+#define CFG_TUD_ENABLED (1)
 // Enable USB-CDC serial port
 #ifndef MICROPY_HW_USB_CDC
 #define MICROPY_HW_USB_CDC (1)
@@ -47,6 +48,11 @@
 // Enable USB Mass Storage with FatFS filesystem.
 #ifndef MICROPY_HW_USB_MSC
 #define MICROPY_HW_USB_MSC (0)
+#endif
+// Enable USB HID 
+#ifndef MICROPY_HW_USB_HID
+#define MICROPY_HW_USB_HID (1)
+#define CFG_TUD_HID_BUFSIZE     (16)
 #endif
 #endif
 
@@ -272,3 +278,11 @@ extern void cyw43_post_poll_hook(void);
 
 #define CYW43_POST_POLL_HOOK cyw43_post_poll_hook();
 #define MICROPY_CYW43_COUNTRY cyw43_country_code
+
+#ifndef MICROPY_HW_BOOT_BOTTON
+#define MICROPY_HW_BOOT_BOTTON (1)
+#endif
+
+#ifndef MICROPY_USB_HID_WAKEUP
+#define MICROPY_USB_HID_WAKEUP (1)
+#endif

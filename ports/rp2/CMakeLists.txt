@@ -129,9 +129,11 @@ set(MICROPY_SOURCE_PORT
     rp2_pio.c
     uart.c
     usbd.c
+    tusbd.c
     msc_disk.c
     mbedtls/mbedtls_port.c
     ${CMAKE_BINARY_DIR}/pins_${MICROPY_BOARD}.c
+    mod_genusb_hid.c
 )
 
 set(MICROPY_SOURCE_QSTR
@@ -154,6 +156,7 @@ set(MICROPY_SOURCE_QSTR
     ${PROJECT_SOURCE_DIR}/modutime.c
     ${PROJECT_SOURCE_DIR}/rp2_flash.c
     ${PROJECT_SOURCE_DIR}/rp2_pio.c
+    ${PROJECT_SOURCE_DIR}/mod_genusb_hid.c
     ${CMAKE_BINARY_DIR}/pins_${MICROPY_BOARD}.c
 )
 
