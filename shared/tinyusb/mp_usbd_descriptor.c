@@ -25,7 +25,10 @@
  * THE SOFTWARE.
  */
 
-#include "mpconfigport.h"
+#include "py/mpconfig.h"
+
+#if MICROPY_HW_ENABLE_USBDEV
+
 #include "tusb.h"
 #include "mp_usbd.h"
 #include "mp_usbd_internal.h"

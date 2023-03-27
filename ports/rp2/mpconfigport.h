@@ -36,8 +36,12 @@
 
 // Board and hardware specific configuration
 #define MICROPY_HW_MCU_NAME                     "RP2040"
+#ifndef MICROPY_HW_ENABLE_UART_REPL
 #define MICROPY_HW_ENABLE_UART_REPL             (0) // useful if there is no USB
+#endif
+#ifndef MICROPY_HW_ENABLE_USBDEV
 #define MICROPY_HW_ENABLE_USBDEV                (1)
+#endif
 
 #if MICROPY_HW_ENABLE_USBDEV
 #define CFG_TUD_ENABLED (1)
@@ -98,10 +102,14 @@
 // Extended modules
 #define MICROPY_EPOCH_IS_1970                   (1)
 #define MICROPY_PY_UOS_INCLUDEFILE              "ports/rp2/moduos.c"
+#ifndef MICROPY_PY_OS_DUPTERM
+#define MICROPY_PY_OS_DUPTERM                   (1)
+#endif
 #define MICROPY_PY_UOS_UNAME                    (1)
 #define MICROPY_PY_UOS_URANDOM                  (1)
 #define MICROPY_PY_URE_MATCH_GROUPS             (1)
 #define MICROPY_PY_URE_MATCH_SPAN_START_END     (1)
+#define MICROPY_PY_UHASHLIB_SHA1                (1)
 #define MICROPY_PY_UCRYPTOLIB                   (1)
 #define MICROPY_PY_UTIME_MP_HAL                 (1)
 #define MICROPY_PY_URANDOM_SEED_INIT_FUNC       (rosc_random_u32())
@@ -143,6 +151,10 @@
 
 // By default networking should include sockets, ssl, websockets, webrepl, dupterm.
 #if MICROPY_PY_NETWORK
+#ifndef MICROPY_PY_NETWORK_HOSTNAME_DEFAULT
+#define MICROPY_PY_NETWORK_HOSTNAME_DEFAULT "mpy-rp2"
+#endif
+
 #ifndef MICROPY_PY_USOCKET
 #define MICROPY_PY_USOCKET              (1)
 #endif
@@ -152,14 +164,8 @@
 #ifndef MICROPY_PY_UWEBSOCKET
 #define MICROPY_PY_UWEBSOCKET           (1)
 #endif
-#ifndef MICROPY_PY_UHASHLIB_SHA1
-#define MICROPY_PY_UHASHLIB_SHA1        (1)
-#endif
 #ifndef MICROPY_PY_WEBREPL
 #define MICROPY_PY_WEBREPL              (1)
-#endif
-#ifndef MICROPY_PY_OS_DUPTERM
-#define MICROPY_PY_OS_DUPTERM           (1)
 #endif
 #endif
 
@@ -205,6 +211,11 @@ extern const struct _mp_obj_type_t mod_network_nic_type_wiznet5k;
     MICROPY_HW_NIC_WIZNET5K \
     MICROPY_BOARD_NETWORK_INTERFACES \
 
+// Additional entries for use with pendsv_schedule_dispatch.
+#ifndef MICROPY_BOARD_PENDSV_ENTRIES
+#define MICROPY_BOARD_PENDSV_ENTRIES
+#endif
+
 #define MP_STATE_PORT MP_STATE_VM
 
 // Miscellaneous settings
@@ -214,6 +225,10 @@ extern const struct _mp_obj_type_t mod_network_nic_type_wiznet5k;
 #endif
 #ifndef MICROPY_HW_USB_PID
 #define MICROPY_HW_USB_PID (0x0005) // RP2 MicroPython
+#endif
+
+#ifndef MICROPY_HW_BOOTSEL_DELAY_US
+#define MICROPY_HW_BOOTSEL_DELAY_US 8
 #endif
 
 // Entering a critical section.
